@@ -11,15 +11,17 @@ function updateCountdown() {
         return;
     }
 
-    // Calculate months, days, minutes, and seconds
+    // Calculate months, days, hours, minutes, and seconds
     const months = Math.floor(timeRemaining / (1000 * 60 * 60 * 24 * 30));
     const days = Math.floor((timeRemaining % (1000 * 60 * 60 * 24 * 30)) / (1000 * 60 * 60 * 24));
-    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60));
+    const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
 
     // Update the UI
     document.getElementById("months-value").innerText = months;
     document.getElementById("days-value").innerText = days;
+    document.getElementById("hours-value").innerText = hours;
     document.getElementById("minutes-value").innerText = minutes;
     document.getElementById("seconds-value").innerText = seconds;
 }
