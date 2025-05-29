@@ -52,7 +52,7 @@ h1 {
     font-weight: bold;
 }
 
-#months-value, #days-value, #minutes-value, #seconds-value {
+#months-value, #days-value, #hours-value, #minutes-value, #seconds-value {
     font-size: 2rem;
     font-weight: bold;
     color: #5d2f8e;
