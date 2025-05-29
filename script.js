@@ -1,32 +1,36 @@
 // Set the wedding date (29th August 2025)
-const weddingDate = new Date("August 29, 2025 00:00:00").getTime();
+const weddingDate = new Date("August 29, 2025 00:00:00");
 
 // Function to calculate the remaining time
 function updateCountdown() {
-    const currentDate = new Date().getTime();
-
     const now = new Date();
-    const target = new Date(weddingDate);
-    
-    let months = (target.getFullYear() - now.getFullYear()) * 12 + (target.getMonth() - now.getMonth());
-    let tempDate = new Date(now.getFullYear(), now.getMonth() + months, now.getDate());
-    
-    if (tempDate > target) {
-        months--;
-        tempDate = new Date(now.getFullYear(), now.getMonth() + months, now.getDate());
-    }
-    
-    const oneDay = 1000 * 60 * 60 * 24;
-    const days = Math.floor((target - tempDate) / oneDay);
-    
-    // Remaining time in milliseconds
-    const timeRemaining = target - now;
 
-    if (timeRemaining <= 0) {
+    if (now >= weddingDate) {
         document.querySelector(".countdown-container").innerHTML = "<h1>It's Happening! Hanzala & Saniya's Wedding Day!</h1>";
         return;
     }
-    
+
+    // Calculate full calendar months between now and weddingDate
+    let months = (weddingDate.getFullYear() - now.getFullYear()) * 12 + (weddingDate.getMonth() - now.getMonth());
+
+    // Create a temp date that adds those months to now
+    let tempDate = new Date(now);
+    tempDate.setMonth(tempDate.getMonth() + months);
+
+    // If that temp date is greater than the target, subtract one month
+    if (tempDate > weddingDate) {
+        months--;
+        tempDate = new Date(now);
+        tempDate.setMonth(tempDate.getMonth() + months);
+    }
+
+    // Calculate remaining days
+    const oneDay = 1000 * 60 * 60 * 24;
+    const days = Math.floor((weddingDate - tempDate) / oneDay);
+
+    // Remaining time in milliseconds
+    const timeRemaining = weddingDate - now;
+
     const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
